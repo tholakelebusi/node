@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 const PORT=3000;
 const app=express();
 
@@ -10,6 +11,9 @@ let bookList=[
     "The secret",
     "The Secreate daughter"
 ]
+
+//to indicate to express u will use body parse
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // var express = require("express");
 // var app = express();
@@ -28,5 +32,25 @@ app.get('/',(request,response)=>
 
 app.get('/books',(request,response)=>
 {
+    return response.json({allBooks:bookList})
+})
+
+app.post('/books',(request,response)=>
+{
+    const bookName= request.body.name;
+
+if(bookList.includes(bookName))
+return response.json({success:false})
+bookList.push(bookName)
+
+return response.json({success:true})
+})
+
+
+app.delete('./books',(request,response)=>
+{
+    const bookToDeELETE=request.body.name
+    bookList=bookList.filter((book)=>book!==bookToDeELETE)
+
     return response.json({allBooks:bookList})
 })
