@@ -1,4 +1,5 @@
 {
+  
   "name": "api",
   "version": "1.0.0",
   "description": "Creating API",
@@ -10,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "type": "module"
+  
+    
 }
