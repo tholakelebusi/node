@@ -54,3 +54,21 @@ app.delete('./books',(request,response)=>
 
     return response.json({allBooks:bookList})
 })
+
+app.put('/books', (request, response) => {
+    
+    const bookToUpdate = request.body.nameToUpdate
+    const updatedBook = request.body.updatedName
+  
+   
+    const indexOfBookToUpdate = bookList.findIndex(
+      (book) => book === bookToUpdate
+    )
+  
+  
+    if (indexOfBookToUpdate === -1) return response.json({ success: false })
+  
+   
+    bookList[indexOfBookToUpdate] = updatedBook
+    return response.json({ success: true })
+  })
